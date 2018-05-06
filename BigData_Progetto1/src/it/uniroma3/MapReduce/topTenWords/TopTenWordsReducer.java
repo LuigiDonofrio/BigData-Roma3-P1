@@ -1,4 +1,4 @@
-package it.uniroma3.it.MapReduce.topTenWords;
+package it.uniroma3.MapReduce.topTenWords;
 
 import java.io.IOException;
 import java.util.ArrayList;

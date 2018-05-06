@@ -1,4 +1,4 @@
-package it.uniroma3.it.MapReduce.Util;
+package it.uniroma3.MapReduce.Util;
 
 import java.io.File;
 import java.io.IOException;

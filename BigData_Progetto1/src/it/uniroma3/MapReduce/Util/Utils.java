@@ -1,4 +1,4 @@
-package it.uniroma3.it.MapReduce.Util;
+package it.uniroma3.MapReduce.Util;
 
 public class Utils {
 	public static final int ID = 0;
