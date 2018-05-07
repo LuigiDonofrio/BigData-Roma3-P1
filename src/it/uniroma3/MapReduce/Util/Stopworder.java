@@ -1,13 +1,13 @@
 package it.uniroma3.MapReduce.Util;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.io.Files;
+import com.google.common.io.CharStreams;
 
 public class Stopworder {
 	private static Stopworder instance;
@@ -22,20 +22,21 @@ public class Stopworder {
 		return instance;
 	}
 	
-	@SuppressWarnings({"deprecation"})
 	private void loadStopWords() throws IOException {
-		File stopWordsFile = new File("/home/luigidonofrio/Scaricati/stop-word-list.csv");
-		String csv = Files.readFirstLine(stopWordsFile, StandardCharsets.UTF_8);
-		String[] stopwords = csv.split(",");
+		InputStream stopWordsFile = getClass().getResourceAsStream("/stopwords-en.txt");
+		
+		String stopWordsLines = CharStreams.toString(new InputStreamReader(stopWordsFile, "UTF-8"));
+		String[] stopwords = stopWordsLines.split("\n");
+		
 		this.stopwords = Arrays.asList(stopwords);
 	}
 	
-	public List<String> removeStopWords (List<String> words) {
+	public List<String> removeStopWords(List<String> words) {
+		List<String> lowerCase = new ArrayList<>();
+		words.stream().forEach(x -> lowerCase.add(x.toLowerCase()));
 		List<String> processed = new ArrayList<>();
-		words.stream().forEach(x -> processed.add(x.toLowerCase()));
-		words.stream().forEach(x -> {if(this.stopwords.contains(x)) processed.remove(x);});
+		lowerCase.stream().forEach(x -> { if(!this.stopwords.contains(x)) processed.add(x); });
+		
 		return processed;
 	}
-	
-
 }

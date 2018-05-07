@@ -9,14 +9,12 @@ import org.apache.hadoop.mapred.FileOutputFormat;
 import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 
-import it.uniroma3.MapReduce.avgScore.AvgScoreMapper;
-import it.uniroma3.MapReduce.avgScore.AvgScoreReducer;
-import it.uniroma3.MapReduce.avgScore.types.YearScoreWritable;
-import it.uniroma3.MapReduce.topTenWords.TopTenWordsMapper;
-import it.uniroma3.MapReduce.topTenWords.TopTenWordsReducer;
+import it.uniroma3.MapReduce.AvgScore.AvgScoreMapper;
+import it.uniroma3.MapReduce.AvgScore.AvgScoreReducer;
+import it.uniroma3.MapReduce.AvgScore.types.YearScoreArrayWritable;
+import it.uniroma3.MapReduce.AvgScore.types.YearScoreWritable;
 
 public class AvgScore {
-	
 	public static void main(String[] args) throws IOException {
 		JobConf conf = new JobConf();
 		conf.setJobName("Amazon Fine Food Reviews - Average Score Per Year");
@@ -31,9 +29,8 @@ public class AvgScore {
         conf.setMapOutputValueClass(YearScoreWritable.class);
         
         conf.setOutputKeyClass(Text.class);
-        conf.setOutputValueClass(Text.class);
-//        
+        conf.setOutputValueClass(YearScoreArrayWritable.class);
+    
         JobClient.runJob(conf);
 	}
-
 }
