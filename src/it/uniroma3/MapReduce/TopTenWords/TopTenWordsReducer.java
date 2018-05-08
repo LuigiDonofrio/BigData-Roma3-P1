@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
@@ -20,14 +21,14 @@ import org.apache.log4j.Logger;
 import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyArrayWritable;
 import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyWritable;
 
-public class TopTenWordsReducer extends MapReduceBase implements Reducer<Text, WordOccurencyWritable, Text, WordOccurencyArrayWritable> {
+public class TopTenWordsReducer extends MapReduceBase implements Reducer<IntWritable, WordOccurencyWritable, IntWritable, WordOccurencyArrayWritable> {
 	private static final int TOP_K = 10;
 	
 	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(TopTenWordsReducer.class);
 	
 	@Override
-	public void reduce(Text year, Iterator<WordOccurencyWritable> word2occurency, OutputCollector<Text, WordOccurencyArrayWritable> output, Reporter reporter) throws IOException {
+	public void reduce(IntWritable year, Iterator<WordOccurencyWritable> word2occurency, OutputCollector<IntWritable, WordOccurencyArrayWritable> output, Reporter reporter) throws IOException {
 		Map<String, Long> occourrenceMap = countWords(word2occurency);	
 		
 		this.writeTopTen(year, output, occourrenceMap);
@@ -46,7 +47,7 @@ public class TopTenWordsReducer extends MapReduceBase implements Reducer<Text, W
 		return occourrenceMap;
 	}
 	
-	private void writeTopTen(Text year, OutputCollector<Text, WordOccurencyArrayWritable> output, Map<String, Long> occourrenceMap) throws IOException {
+	private void writeTopTen(IntWritable year, OutputCollector<IntWritable, WordOccurencyArrayWritable> output, Map<String, Long> occourrenceMap) throws IOException {
         List<Map.Entry<String, Long>> sortedMap = new ArrayList<>(occourrenceMap.entrySet());
         
         Collections.sort(sortedMap, new Comparator<Map.Entry<String, Long>>() {

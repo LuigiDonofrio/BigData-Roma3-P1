@@ -3,7 +3,7 @@ package it.uniroma3.MapReduce.jobs;
 import java.io.IOException;
 
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
 import org.apache.hadoop.mapred.JobClient;
@@ -27,10 +27,10 @@ public class TopTenWords {
         conf.setCombinerClass(TopTenWordsCombiner.class);
         conf.setReducerClass(TopTenWordsReducer.class);
         
-        conf.setMapOutputKeyClass(Text.class);
+        conf.setMapOutputKeyClass(IntWritable.class);
         conf.setMapOutputValueClass(WordOccurencyWritable.class);
         
-        conf.setOutputKeyClass(Text.class);
+        conf.setOutputKeyClass(IntWritable.class);
         conf.setOutputValueClass(WordOccurencyArrayWritable.class);
         
         JobClient.runJob(conf);

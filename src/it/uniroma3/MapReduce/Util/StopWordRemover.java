@@ -33,7 +33,12 @@ public class StopWordRemover {
 	
 	public List<String> removeStopWords(List<String> words) {
 		List<String> lowerCase = new ArrayList<>();
-		words.stream().forEach(x -> lowerCase.add(x.toLowerCase()));
+		words.stream().forEach(x -> {
+			String purged = x.trim();
+			
+			if(purged.length() > 0)
+				lowerCase.add(purged.toLowerCase());
+		});
 		List<String> processed = new ArrayList<>();
 		lowerCase.stream().forEach(x -> { if(!this.stopwords.contains(x)) processed.add(x); });
 		

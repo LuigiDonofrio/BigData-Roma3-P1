@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
@@ -20,17 +21,17 @@ import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyWritable;
 /* In this case it's different from Reducer's logic because we don't want to filter top 10 results */
 /* but we only need to have a single key-value pair for a word and return a partial sum */
 /* for a given data chunk. */
-public class TopTenWordsCombiner extends MapReduceBase implements Reducer<Text, WordOccurencyWritable, Text, WordOccurencyWritable> {
+public class TopTenWordsCombiner extends MapReduceBase implements Reducer<IntWritable, WordOccurencyWritable, IntWritable, WordOccurencyWritable> {
 	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(TopTenWordsCombiner.class);
 	
 	@Override
-	public void reduce(Text year, Iterator<WordOccurencyWritable> word2occurency, OutputCollector<Text, WordOccurencyWritable> output, Reporter reporter) throws IOException {
+	public void reduce(IntWritable year, Iterator<WordOccurencyWritable> word2occurency, OutputCollector<IntWritable, WordOccurencyWritable> output, Reporter reporter) throws IOException {
 		Map<String, Long> occourrenceMap = countWords(word2occurency);
 		
 		for(String key : occourrenceMap.keySet()) {
 			Long occurencies = occourrenceMap.get(key);
-			output.collect(new Text(year), new WordOccurencyWritable(new Text(key), new LongWritable(occurencies)));
+			output.collect(year, new WordOccurencyWritable(new Text(key), new LongWritable(occurencies)));
 		}
 	}
 
