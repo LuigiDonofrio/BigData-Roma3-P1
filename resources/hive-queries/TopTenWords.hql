@@ -1,4 +1,4 @@
-add jar SplitAndPurge.jar;
+ADD JAR SplitAndPurge.jar;
 CREATE TEMPORARY FUNCTION split_and_purge AS 'it.uniroma3.hive.UserDefinedFunctions.SplitAndPurge';
 
 SELECT word_year, word, occurencies
