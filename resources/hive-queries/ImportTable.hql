@@ -16,7 +16,7 @@ ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 WITH SERDEPROPERTIES (
    "separatorChar" = ",",
    "quoteChar"     = "\"",
-   "escapeChar"    = "\\"
+   "escapeChar"    = "\""
 )
 TBLPROPERTIES('skip.header.line.count'='1');
 

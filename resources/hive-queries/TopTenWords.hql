@@ -3,12 +3,15 @@ CREATE TEMPORARY FUNCTION split_and_purge AS 'it.uniroma3.hive.UserDefinedFuncti
 
 SELECT word_year, word, occurencies
 FROM (
-	SELECT word_year, word, COUNT(1) AS occurencies, ROW_NUMBER() OVER (PARTITION BY word_year) AS row_number
+	SELECT word2occurencies.*, RANK() OVER (PARTITION BY word_year ORDER BY occurencies DESC) AS rank
 	FROM (
-		SELECT year(from_unixtime(CAST(time AS INT))) AS word_year, word
-		FROM amazonfinegoodsreviews LATERAL VIEW explode(split_and_purge(summary)) amazonfinegoodsreviews AS word
-	) AS year2word
-	WHERE word_year IS NOT NULL
-	GROUP BY word_year, word
-) AS word2occurencies
-ORDER BY word DESC
+		SELECT word_year, word, COUNT(1) AS occurencies
+		FROM (
+			SELECT year(from_unixtime(CAST(time AS INT))) AS word_year, word
+			FROM AmazonFineGoodsReviews LATERAL VIEW explode(split_and_purge(summary)) AmazonFineGoodsReviews AS word
+		) AS year2word
+		WHERE word_year IS NOT NULL
+		GROUP BY word_year, word
+	) AS word2occurencies
+) AS top10
+WHERE rank <= 10
