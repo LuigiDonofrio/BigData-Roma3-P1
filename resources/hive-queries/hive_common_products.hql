@@ -1,5 +1,5 @@
-SELECT p1, p2, count(utente) as users 
-FROM (SELECT t1.productid as p1, t2.productid as p2, t1.userid as utente
+SELECT p1, p2, count(_user) as users 
+FROM (SELECT t1.productid as p1, t2.productid as p2, t1.userid as _user
       FROM AmazonFineGoodsReviews t1 
       JOIN AmazonFineGoodsReviews t2 
       ON t1.userid = t2.userid 
