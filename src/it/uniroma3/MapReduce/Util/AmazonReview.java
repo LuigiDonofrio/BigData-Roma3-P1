@@ -8,7 +8,7 @@ public class AmazonReview {
 	private int helpfullnessNumerator;
 	private int helpfullnessDenominator;
 	private int score;
-	private String year;
+	private int year;
 	private String summary;
 	private String text;
 	
@@ -54,10 +54,10 @@ public class AmazonReview {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 	public String getSummary() {

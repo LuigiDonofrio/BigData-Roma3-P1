@@ -31,7 +31,9 @@ public class ProductUserMapper extends MapReduceBase implements Mapper<LongWrita
 		}
 		
 		/* Trickage: Instead of having 2 mappers to do the join, duplicate the same output */
-		output.collect(new Text(review.getUserId()), new Text("T1\t"+review.getProductId()));
-		output.collect(new Text(review.getUserId()), new Text("T2\t"+review.getProductId()));
+		/* The 1-2\t will be used in reducer to understand how to join values */
+		/* from first "table" with the ones from the "second" table. */
+		output.collect(new Text(review.getUserId()), new Text("1\t"+review.getProductId()));
+		output.collect(new Text(review.getUserId()), new Text("2\t"+review.getProductId()));
 	}
 }

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.apache.hadoop.io.ArrayWritable;
 
 public class WordOccurencyArrayWritable extends ArrayWritable {
-
     public WordOccurencyArrayWritable(WordOccurencyWritable[] values) {
         super(WordOccurencyWritable.class, values);
     }

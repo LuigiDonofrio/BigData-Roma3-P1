@@ -34,7 +34,7 @@ public class AvgScoreMapper extends MapReduceBase implements Mapper<LongWritable
 
 		out.collect(
 			new Text(review.getProductId()), 
-			new YearScoreWritable(new IntWritable(Integer.parseInt(review.getYear())), new FloatWritable(review.getScore()))
+			new YearScoreWritable(new IntWritable(review.getYear()), new FloatWritable(review.getScore()))
 		);
 	}
 }

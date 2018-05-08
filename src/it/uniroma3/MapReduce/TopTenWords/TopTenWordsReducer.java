@@ -21,6 +21,8 @@ import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyArrayWritable;
 import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyWritable;
 
 public class TopTenWordsReducer extends MapReduceBase implements Reducer<Text, WordOccurencyWritable, Text, WordOccurencyArrayWritable> {
+	private static final int TOP_K = 10;
+	
 	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(TopTenWordsReducer.class);
 	
@@ -38,7 +40,7 @@ public class TopTenWordsReducer extends MapReduceBase implements Reducer<Text, W
 			if (occourrenceMap.containsKey(x.getWord().toString()))
 				occourrenceMap.put(x.getWord().toString(), occourrenceMap.get(x.getWord().toString()) + x.getOccurency().get());
 			else
-				occourrenceMap.put(x.getWord().toString(), 1l);
+				occourrenceMap.put(x.getWord().toString(), x.getOccurency().get());
 		});
 		
 		return occourrenceMap;
@@ -54,9 +56,9 @@ public class TopTenWordsReducer extends MapReduceBase implements Reducer<Text, W
     		}
     	});
         
-        WordOccurencyWritable[] top10 = new WordOccurencyWritable[10];
+        WordOccurencyWritable[] top10 = new WordOccurencyWritable[TOP_K];
         
-    	int maxSize = (sortedMap.size() >= 10) ? 10 : sortedMap.size();
+    	int maxSize = (sortedMap.size() >= TOP_K) ? TOP_K : sortedMap.size();
     	
     	for(int i = 0; i < maxSize; ++i)
     		top10[i] = new WordOccurencyWritable(new Text(sortedMap.get(i).getKey().toString()), new LongWritable(sortedMap.get(i).getValue()));

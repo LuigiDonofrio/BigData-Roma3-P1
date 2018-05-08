@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.apache.hadoop.io.ArrayWritable;
 
 public class YearScoreArrayWritable extends ArrayWritable {
-
     public YearScoreArrayWritable(YearScoreWritable[] values) {
         super(YearScoreWritable.class, values);
     }

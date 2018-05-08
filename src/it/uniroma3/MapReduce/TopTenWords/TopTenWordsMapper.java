@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
@@ -15,13 +16,13 @@ import org.apache.log4j.Logger;
 import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyWritable;
 import it.uniroma3.MapReduce.Util.AmazonReview;
 import it.uniroma3.MapReduce.Util.CSVFieldsExtractor;
-import it.uniroma3.MapReduce.Util.Stopworder;
+import it.uniroma3.MapReduce.Util.StopWordRemover;
 
-public class TopTenWordsMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, WordOccurencyWritable> {
+public class TopTenWordsMapper extends MapReduceBase implements Mapper<LongWritable, Text, IntWritable, WordOccurencyWritable> {
 	private Logger log = Logger.getLogger(TopTenWordsMapper.class);
 	
 	@Override
-	public void map(LongWritable key, Text value, OutputCollector<Text, WordOccurencyWritable> output, Reporter reporter) throws IOException {
+	public void map(LongWritable key, Text value, OutputCollector<IntWritable, WordOccurencyWritable> output, Reporter reporter) throws IOException {
 		String csvLine = value.toString();
 		
 		AmazonReview review = null;
@@ -34,11 +35,12 @@ public class TopTenWordsMapper extends MapReduceBase implements Mapper<LongWrita
 			return;
 		}
 		
-		String[] words = review.getSummary().split("\\W+");
-		Stopworder sw = Stopworder.getInstance();
-		List<String> processed = sw.removeStopWords(Arrays.asList(words));
+		String[] words = review.getSummary().split("\\W+"); /* Splits on every non-word (dots, commas...) */
+		StopWordRemover swRemover = StopWordRemover.getInstance();
+		/* Removes stopwords so results are cleaner and we avoid stuff like "a", "the"... */
+		List<String> processed = swRemover.removeStopWords(Arrays.asList(words));
 		
 		for(String word : processed)
-			output.collect(new Text(review.getYear()), new WordOccurencyWritable(new Text(word), new LongWritable(1)));
+			output.collect(new IntWritable(review.getYear()), new WordOccurencyWritable(new Text(word), new LongWritable(1)));
 	}
 }

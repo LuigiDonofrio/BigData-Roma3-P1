@@ -9,16 +9,16 @@ import java.util.List;
 
 import com.google.common.io.CharStreams;
 
-public class Stopworder {
-	private static Stopworder instance;
+public class StopWordRemover {
+	private static StopWordRemover instance;
 	private List<String> stopwords;
 	
-	private Stopworder() throws IOException {
+	private StopWordRemover() throws IOException {
 		loadStopWords();
 	}
 	
-	public static Stopworder getInstance() throws IOException {
-		instance = (instance == null) ? new Stopworder() : instance;
+	public static StopWordRemover getInstance() throws IOException {
+		instance = (instance == null) ? new StopWordRemover() : instance;
 		return instance;
 	}
 	

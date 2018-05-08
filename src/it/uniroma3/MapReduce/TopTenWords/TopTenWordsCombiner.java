@@ -15,6 +15,11 @@ import org.apache.log4j.Logger;
 
 import it.uniroma3.MapReduce.TopTenWords.types.WordOccurencyWritable;
 
+/* Combiner has same output type of Mapper and same input type of Reducer. */
+/* It isn't always executed so even if skipped, it won't change the Reducer's result. */
+/* In this case it's different from Reducer's logic because we don't want to filter top 10 results */
+/* but we only need to have a single key-value pair for a word and return a partial sum */
+/* for a given data chunk. */
 public class TopTenWordsCombiner extends MapReduceBase implements Reducer<Text, WordOccurencyWritable, Text, WordOccurencyWritable> {
 	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(TopTenWordsCombiner.class);
@@ -25,7 +30,6 @@ public class TopTenWordsCombiner extends MapReduceBase implements Reducer<Text, 
 		
 		for(String key : occourrenceMap.keySet()) {
 			Long occurencies = occourrenceMap.get(key);
-			
 			output.collect(new Text(year), new WordOccurencyWritable(new Text(key), new LongWritable(occurencies)));
 		}
 	}
@@ -37,7 +41,7 @@ public class TopTenWordsCombiner extends MapReduceBase implements Reducer<Text, 
 			if (occourrenceMap.containsKey(x.getWord().toString()))
 				occourrenceMap.put(x.getWord().toString(), occourrenceMap.get(x.getWord().toString()) + x.getOccurency().get());
 			else
-				occourrenceMap.put(x.getWord().toString(), 1l);
+				occourrenceMap.put(x.getWord().toString(), x.getOccurency().get());
 		});
 		
 		return occourrenceMap;

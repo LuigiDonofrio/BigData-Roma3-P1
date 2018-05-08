@@ -20,6 +20,9 @@ import it.uniroma3.MapReduce.AvgScore.types.YearScoreArrayWritable;
 import it.uniroma3.MapReduce.AvgScore.types.YearScoreWritable;
 
 public class AvgScoreReducer extends MapReduceBase implements Reducer<Text, YearScoreWritable, Text, YearScoreArrayWritable> {
+	private static final int MIN_YEAR = 2003;
+	private static final int MAX_YEAR = 2012;
+	
 	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(AvgScoreReducer.class);
 	
@@ -36,7 +39,8 @@ public class AvgScoreReducer extends MapReduceBase implements Reducer<Text, Year
 		year2score.forEachRemaining(x -> {
 			int year = x.getYear().get();
 			
-			if(year < 2003 || year > 2012) 
+			/* Pre-filtering on year value */
+			if(year < MIN_YEAR || year > MAX_YEAR) 
 				return;
 				
 			List<Float> scores = null;
@@ -66,6 +70,7 @@ public class AvgScoreReducer extends MapReduceBase implements Reducer<Text, Year
         
         int i = 0;
         for(int k : year2avg.keySet()) {
+        	/* Only one value is stored in this List, because it's computed in getAvgScoreByYear */
         	float v = year2avg.get(k).get(0);
         
         	year2avgWritable[i] = new YearScoreWritable(
