@@ -1,4 +1,14 @@
-/target
-/.settings
+/BigData_Progetto1_Hive/target
+/BigData_Progetto1_Hive/.settings
+/BigData_Progetto1_Hive/.classpath
+/BigData_Progetto1_Hive/.project
+/BigData_Progetto1_MapReduce/target
+/BigData_Progetto1_MapReduce/.settings
+/BigData_Progetto1_MapReduce/.classpath
+/BigData_Progetto1_MapReduce/.project
+/BigData_Progetto1_Spark/target
+/BigData_Progetto1_Spark/.settings
+/BigData_Progetto1_Spark/.classpath
+/BigData_Progetto1_Spark/.project
 .classpath
 .project

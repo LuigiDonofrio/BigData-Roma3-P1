@@ -1,0 +1,96 @@
+admin
+hdadmin
+F9a29e831b#
+
+// SETUP //
+	- 6 Nodes
+		- 2 Heads
+			* 8 vCore
+			* 28GB RAM
+		- 4 Workers
+			* 32 vCore
+			* 28GB RAM
+
+# TOP TEN WORDS #
+	~~ MR - WITH COMBINER ~~
+		- 50 ROWS - TopTenWords: Completed in: 49739ms (1 split)
+		- 50K ROWS - TopTenWords: Completed in: 33779ms (1 split)
+		- 142K ROWS - TopTenWords: Completed in: 29747ms (1 split)
+		- 284K ROWS - TopTenWords: Completed in: 37832ms (1 split)
+		- ORIGINAL FILE (568K ROWS) - TopTenWords: Completed in: 48328ms (1 split)
+		- 618K ROWS - TopTenWords: Completed in: 51445ms (1 split)
+		- 1M ROWS - TopTenWords: Completed in: 66193ms (2 splits)
+
+	~~ HIVE ~~
+		- 50 ROWS - Time taken: 79.077 seconds, Fetched: 84 row(s)
+		- 50K ROWS - Time taken: 72.228 seconds, Fetched: 131 row(s)
+		- 142K ROWS - Time taken: 87.418 seconds, Fetched: 153 row(s)
+		- 284K ROWS - Time taken: 93.413 seconds, Fetched: 190 row(s)
+		- ORIGINAL FILE (568K ROWS) - Time taken: 111.471 seconds, Fetched: 165 row(s)
+		- 618K ROWS - Time taken: 110.94 seconds, Fetched: 167 row(s)
+		- 1M ROWS - Time taken: 98.147 seconds, Fetched: 165 row(s)
+	
+	~~ SPARK yarn ~~
+		- 50 ROWS - Completed in: 3867ms
+		- 50K ROWS - Completed in: 2941ms
+		- 142K ROWS - Completed in: 6057ms
+		- 284K ROWS - Completed in: 9860ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 13784ms
+		- 618K ROWS - Completed in: 16702ms
+		- 1M ROWS - Completed in: 27649ms
+
+# AVG SCORE # 
+	~~ MR ~~
+		- 50 ROWS - AvgScore: Completed in: 22790ms (1 split)
+		- 50K ROWS - AvgScore: Completed in: 26107ms (1 split)
+		- 142K ROWS - AvgScore: Completed in: 28845ms (1 split)
+		- 284K ROWS - AvgScore: Completed in: 31754ms (1 split)
+		- ORIGINAL FILE (568K ROWS) - AvgScore: Completed in: 41730ms (1 split)
+		- 618K ROWS - AvgScore: Completed in: 41920ms (1 split)
+		- 1M ROWS - AvgScore: Completed in: 47019ms (2 splits)
+	
+	~~ HIVE ~~
+		- 50 ROWS - Time taken: 59.677 seconds, Fetched: 25 row(s)
+		- 50K ROWS - Time taken: 60.547 seconds, Fetched: 12402 row(s)
+		- 142K ROWS - Time taken: 63.102 seconds, Fetched: 36282 row(s)
+		- 284K ROWS - Time taken: 69.809 seconds, Fetched: 73373 row(s)
+		- ORIGINAL FILE (568K ROWS) - Time taken: 78.198 seconds, Fetched: 147658 row(s)
+		- 618K ROWS - Time taken: 82.422 seconds, Fetched: 148844 row(s)
+		- 1M ROWS - Time taken: 75.181 seconds, Fetched: 150760 row(s)
+
+	~~ SPARK yarn ~~
+		- 50 ROWS - Completed in: 1385ms
+		- 50K ROWS - Completed in: 3620ms
+		- 142K ROWS - Completed in: 3960ms
+		- 284K ROWS - Completed in: 6890ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 11023ms
+		- 618K ROWS - Completed in: 14893ms
+		- 1M ROWS - Completed in: 18278ms
+
+# PRODUCT JOIN # 
+	~~ MR ~~
+		- 50 ROWS - ProductJoin: Completed in: 44319ms (1 split)
+		- 50K ROWS - ProductJoin: Completed in: 46638ms (1 split)
+		- 142K ROWS - ProductJoin: Completed in: 55368ms (1 split)
+		- 284K ROWS - ProductJoin: Completed in: 79909ms (1 split)
+		- ORIGINAL FILE (568K ROWS) - ProductJoin: Completed in: 160114ms (1 split)
+		- 618K ROWS - ProductJoin: Completed in: 177914ms (1 split)
+		- 1M ROWS - ProductJoin: Completed in: 300703ms (2 splits)
+	
+	~~ HIVE ~~
+		- 50 ROWS - Time taken: 65.212 seconds, Fetched: 1 row(s)
+		- 50K ROWS - Time taken: 69.717 seconds, Fetched: 13239 row(s)
+		- 142K ROWS - Time taken: 79.801 seconds, Fetched: 113152 row(s)
+		- 284K ROWS - Time taken: 88.935 seconds, Fetched: 424709 row(s)
+		- ORIGINAL FILE (568K ROWS) - Time taken: 123.367 seconds, Fetched: 1712150 row(s)
+		- 618K ROWS - Time taken: 137.641 seconds, Fetched: 1814214 row(s)
+		- 1M ROWS - Time taken: 129.802 seconds, Fetched: 2895822 row(s)
+
+	~~ SPARK yarn ~~
+		- 50 ROWS - Completed in: 1724ms
+		- 50K ROWS - Completed in: 2808ms
+		- 142K ROWS - Completed in: 8524ms
+		- 284K ROWS - Completed in: 20673ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 92998ms
+		- 618K ROWS - Completed in: 109978ms
+		- 1M ROWS - Completed in: 221885ms

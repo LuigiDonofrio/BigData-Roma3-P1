@@ -1,0 +1,115 @@
+// SETUP //
+	* Core i7
+	* 8GB RAM
+	* 256GB SSD
+
+# TOP TEN WORDS #
+	~~ MR - WITH COMBINER ~~
+		- 50 ROWS - TopTenWords: Completed in: 1698ms
+		- 50K ROWS - TopTenWords: Completed in: 3720ms
+		- 142K ROWS - TopTenWords: Completed in: 5770ms
+		- 284K ROWS - TopTenWords: Completed in: 8714ms
+		- ORIGINAL FILE (568K ROWS) - TopTenWords: Completed in: 15743ms
+		- 618K ROWS - TopTenWords: Completed in: 15732ms
+		- 1M ROWS - TopTenWords: Completed in: 26769ms
+
+	~~ HIVE ~~
+		- 50 ROWS - Time taken: 3.914 seconds, Fetched: 84 row(s)
+		- 50K ROWS - Time taken: 6.876 seconds, Fetched: 131 row(s)
+		- 142K ROWS - Time taken: 13.175 seconds, Fetched: 153 row(s)
+		- 284K ROWS - Time taken: 12.003 seconds, Fetched: 190 row(s)
+		- ORIGINAL FILE (568K ROWS) - Time taken: 44.119 seconds, Fetched: 165 row(s)
+		- 618K ROWS - Time taken: 41.983 seconds, Fetched: 167 row(s)
+		- 1M ROWS - Time taken: 78.588 seconds, Fetched: 165 row(s)
+
+	~~ SPARK local[8] - WRITE ON FILE ~~
+		- 50 ROWS - Completed in: 4045ms
+		- 50K ROWS - Completed in: 5317ms
+		- 142K ROWS - Completed in: 6557ms
+		- 284K ROWS - Completed in: 8515ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 12609ms
+		- 618K ROWS - Completed in: 12014ms
+		- 1M ROWS - Completed in: 17212ms
+	
+	~~ SPARK local[8] - NO I/O ~~
+		- 50 ROWS - Completed in: 3129ms
+		- 50K ROWS - Completed in: 4714ms
+		- 142K ROWS - Completed in: 5831ms
+		- 284K ROWS - Completed in: 8130ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 12356ms
+		- 618K ROWS - Completed in: 12766ms
+		- 1M ROWS - Completed in: 14596ms
+
+# AVG SCORE # 
+	~~ MR ~~
+		- 50 ROWS - AvgScore: Completed in: 1732ms
+		- 50K ROWS - AvgScore: Completed in: 2745ms
+		- 142K ROWS - AvgScore: Completed in: 4702ms
+		- 284K ROWS - AvgScore: Completed in: 6755ms
+		- ORIGINAL FILE (568K ROWS) - AvgScore: Completed in: 9760ms
+		- 618K ROWS - AvgScore: Completed in: 9730ms
+		- 1M ROWS - AvgScore: Completed in: 13768ms
+	
+	~~ HIVE ~~
+		- 50 ROWS - Time taken: 7.922 seconds, Fetched: 25 row(s)
+		- 50K ROWS - Time taken: 7.785 seconds, Fetched: 12402 row(s)
+		- 142K ROWS - Time taken: 15.984 seconds, Fetched: 36282 row(s)
+		- 284K ROWS - Time taken: 23.52 seconds, Fetched: 73373 row(s)
+		- ORIGINAL FILE (568K ROWS) - Time taken: 41.046 seconds, Fetched: 147658 row(s)
+		- 618K ROWS - Time taken: 44.22 seconds, Fetched: 148844 row(s)
+		- 1M ROWS - Time taken: 66.46 seconds, Fetched: 150760 row(s)
+	
+	~~ SPARK local[8] - WRITE ON FILE ~~
+		- 50 ROWS - Completed in: 3288ms
+		- 50K ROWS - Completed in: 5092ms
+		- 142K ROWS - Completed in: 7892ms
+		- 284K ROWS - Completed in: 8015ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 9998ms
+		- 618K ROWS - Completed in: 11094ms
+		- 1M ROWS - Completed in: 14144ms
+
+	~~ SPARK local[8] - NO I/O ~~
+		- 50 ROWS - Completed in: 3092ms
+		- 50K ROWS - Completed in: 4272ms
+		- 142K ROWS - Completed in: 5149ms
+		- 284K ROWS - Completed in: 6299ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 8166ms
+		- 618K ROWS - Completed in: 8839ms
+		- 1M ROWS - Completed in: 13232ms
+
+# PRODUCT JOIN # 
+	~~ MR ~~
+		- 50 ROWS - ProductJoin: Completed in: 3583ms
+		- 50K ROWS - ProductJoin: Completed in: 4572ms
+		- 142K ROWS - ProductJoin: Completed in: 9561ms
+		- 284K ROWS - ProductJoin: Completed in: 20642ms
+		- ORIGINAL FILE (568K ROWS) - ProductJoin: Completed in: 70643ms
+		- 618K ROWS - ProductJoin: Completed in: 71596ms
+		- 1M ROWS - ProductJoin: Completed in: 141745ms
+
+	~~ HIVE ~~
+		- 50 ROWS - Time taken: 16.945 seconds, Fetched: 1 row(s)
+		- 50K ROWS - Time taken: 21.786 seconds, Fetched: 13239 row(s)
+		- 142K ROWS - Time taken: 22.166 seconds, Fetched: 113152 row(s)
+		- 284K ROWS - Time taken: 36.201 seconds, Fetched: 424709 row(s)
+		- ORIGINAL FILE (568K ROWS) - Time taken: 82.078 seconds, Fetched: 1712150 row(s)
+		- 618K ROWS - Time taken: 88.047 seconds, Fetched: 1814214 row(s)
+		- 1M ROWS - Time taken: 244.67 seconds, Fetched: 2895822 row(s)
+
+	~~ SPARK local[8] - WRITE ON FILE ~~
+		- 50 ROWS - Completed in: 3304ms
+		- 50K ROWS - Completed in: 5176ms
+		- 142K ROWS - Completed in: 8419ms
+		- 284K ROWS - Completed in: 27108ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 92248ms
+		- 618K ROWS - Completed in: 103163ms
+		- 1M ROWS - Exceptions
+	
+	~~ SPARK local[8] - NO I/O ~~
+		- 50 ROWS - Completed in: 3134ms
+		- 50K ROWS - Completed in: 4828ms
+		- 142K ROWS - Completed in: 7588ms
+		- 284K ROWS - Completed in: 16199ms
+		- ORIGINAL FILE (568K ROWS) - Completed in: 66034ms
+		- 618K ROWS - Completed in: 79493ms
+		- 1M ROWS - Completed in: 125148ms
