@@ -1,7 +1,3 @@
-admin
-hdadmin
-F9a29e831b#
-
 // SETUP //
 	- 6 Nodes
 		- 2 Heads
