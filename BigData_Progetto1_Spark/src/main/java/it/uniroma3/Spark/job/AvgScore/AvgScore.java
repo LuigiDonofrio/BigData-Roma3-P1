@@ -55,9 +55,7 @@ public class AvgScore {
 	    	return new Tuple2<String, List<Tuple2<Integer, Float>>>(x._1(), AvgScoreTask.getAvgByYear(x._2()));
 	    })
 	    .sortByKey()
-	    .coalesce(1)
-	  //.saveAsTextFile(this.outputPath)
-	  	;
+	    .coalesce(1);
 	}
 	
 	public static void main(String[] args) {
